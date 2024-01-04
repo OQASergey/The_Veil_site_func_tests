@@ -5,7 +5,7 @@ from selenium import webdriver
 @pytest.fixture(scope='module', autouse=True)
 def browser_conditions():
     browser.config.driver_name = 'chrome'
-    browser.config.timeout = 5
+    browser.config.timeout = 3
 
     driver_options = webdriver.ChromeOptions()
     #driver_options.add_argument('--headless')
@@ -14,6 +14,7 @@ def browser_conditions():
     browser.open()
     print('')
     print('Браузер открыт')
+    print('**Начало исполнения тестового набора**')
 
     yield
 
