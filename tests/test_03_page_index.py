@@ -29,3 +29,11 @@ def test_click_on_sectors():
     browser.element('[class="primary-btn class-btn"][id="glr1"]').click()
     browser.should(have.url_containing('/theveil/gallery.html'))
     browser.open('/theveil/')
+
+def test_up_buton():
+    print('')
+    print('Клик на кнопку "Наверх"')
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/#'))
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/#'))
