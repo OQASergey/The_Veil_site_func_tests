@@ -59,44 +59,44 @@ def test_hover_booklets():
     #Первый уровень
     browser.perform(scroll(0,350))
     browser.all('[name="flr1"]>div')[0].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}01.png'))
     browser.all('[name="flr1"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}02.png'))
     browser.all('[name="flr1"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}03.png'))
     browser.all('[name="flr1"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}04.png'))
     #Второй уровень
     browser.perform(scroll(0,350))
     browser.all('[name="flr2"]>div')[0].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}05.png'))
     browser.all('[name="flr2"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}06.png'))
     browser.all('[name="flr2"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}07.png'))
     browser.all('[name="flr2"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}08.png'))
     #Третий уровень
     browser.perform(scroll(0,350))
     browser.all('[name="flr3"]>div')[0].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}09.png'))
     browser.all('[name="flr3"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}10.png'))
     browser.all('[name="flr3"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}11.png'))
     browser.all('[name="flr3"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1.5)
+    time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}12.png'))
     browser.perform(scroll(0,-10000))
 
@@ -118,7 +118,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Второй буклет
     browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}02.png'))
     browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').click()
@@ -128,7 +128,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Третий буклет
     browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}03.png'))
     browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').click()
@@ -138,7 +138,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Четвёртый буклет
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}04.png'))
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').click()
@@ -148,6 +148,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Второй уровень
     #Пятый буклет
+    browser.perform(scroll(0,350))
     browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
     browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
@@ -159,7 +160,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Шестой буклет
     browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}06.png'))
     browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').click()
@@ -169,7 +170,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Седьмой буклет
     browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}07.png'))
     browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').click()
@@ -179,7 +180,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Восьмой буклет
     browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}08.png'))
     browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').click()
@@ -189,6 +190,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Третий уровень
     #Девятый буклет
+    browser.perform(scroll(0,350))
     browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
     browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
@@ -200,7 +202,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Десятый буклет
     browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}10.png'))
     browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').click()
@@ -210,7 +212,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Одинадцатый буклет
     browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}11.png'))
     browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').click()
@@ -220,7 +222,7 @@ def test_click_on_booklets_button():
     browser.switch_to_tab(0)
     #Двенадцатый буклет
     browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
-    browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').click()
+    browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link3}12.png'))
     browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').click()
@@ -229,4 +231,6 @@ def test_click_on_booklets_button():
     browser.close_current_tab()
     browser.switch_to_tab(0)
     browser.perform(scroll(0,-10000))
+
+
 
