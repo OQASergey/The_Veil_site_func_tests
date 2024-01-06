@@ -23,3 +23,4 @@ def browser_conditions():
     print('')
     print('Браузер закрыт')
     print('**Завершение исполнения тестового набора**')
+    print('Скриншоты сохранены: C:/_test_screenshots/')
