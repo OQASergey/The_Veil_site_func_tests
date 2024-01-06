@@ -1,8 +1,10 @@
-from selene import browser, have, be
+from selene import browser, have, be, query
 import requests
+import time
 
 response = requests.get('http://localhost/theveil/theveil/')
 status = response.status_code
+link = 'C:/_test_screenshots/test_02_menu_all-pages/'
 
 def test_start():
     browser.open("/theveil/")
@@ -16,12 +18,32 @@ def test_start():
 
 def test_active_button():
     print('')
-    print('Главное меню: подсветка разделов')
+    print('Главное меню: дефолтная подсветка разделов')
     browser.element('[class="mainmenu mobile-menu"]>ul>li[class="active"]').should(be.present)
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[1].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[2].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[3].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[4].should(have.no.css_class("active"))
+
+def test_hover_buttons_index():
+    print('')
+    print('Главное меню:"index":подсветка разделов при наведении')
+    browser.element('[id="ind0"]').hover()
+    time.sleep(1.5)
+    link1 = 'test_hover_buttons_1_index_'
+    browser.get(query.screenshot_saved(f'{link}{link1}1.png'))
+    browser.element('[id="plb0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link1}2.png'))
+    browser.element('[id="mvs0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link1}3.png'))
+    browser.element('[id="tbl0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link1}4.png'))
+    browser.element('[id="glr0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link1}5.png'))
 
 def test_click_on_menu_ind():
     print('')
@@ -44,6 +66,26 @@ def test_click_on_menu_plb():
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[2].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[3].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[4].should(have.no.css_class("active"))
+
+def test_hover_buttons_playbooks():
+    print('')
+    print('Главное меню:"playbooks":подсветка разделов при наведении')
+    browser.element('[id="ind0"]').hover()
+    time.sleep(1.5)
+    link2 = 'test_hover_buttons_2_playbooks_'
+    browser.get(query.screenshot_saved(f'{link}{link2}1.png'))
+    browser.element('[id="plb0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link2}2.png'))
+    browser.element('[id="mvs0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link2}3.png'))
+    browser.element('[id="tbl0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link2}4.png'))
+    browser.element('[id="glr0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link2}5.png'))
     browser.element('[id="ind0"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
@@ -57,8 +99,29 @@ def test_click_on_menu_mvs():
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[2].should(have.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[3].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"]>ul>li')[4].should(have.no.css_class("active"))
+
+def test_hover_buttons_moves():
+    print('')
+    print('Главное меню:"moves":подсветка разделов при наведении')
+    browser.element('[id="ind0"]').hover()
+    time.sleep(1.5)
+    link3 = 'test_hover_buttons_3_moves_'
+    browser.get(query.screenshot_saved(f'{link}{link3}1.png'))
+    browser.element('[id="plb0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}2.png'))
+    browser.element('[id="mvs0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}3.png'))
+    browser.element('[id="tbl0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}4.png'))
+    browser.element('[id="glr0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}5.png'))
     browser.element('[id="ind0"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
+
 
 def test_click_on_menu_tbl():
     print('')
@@ -75,6 +138,26 @@ def test_click_on_menu_tbl():
     browser.all('[class="mainmenu mobile-menu"][name=menu1]>ul>li')[1].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"][name=menu1]>ul>li')[2].should(have.no.css_class("active"))
     browser.all('[class="mainmenu mobile-menu"][name=menu1]>ul>li')[3].should(have.no.css_class("active"))
+
+def test_hover_buttons_tables_custom():
+    print('')
+    print('Главное меню:"tables_custom":подсветка разделов при наведении')
+    browser.element('[id="ind0"]').hover()
+    time.sleep(1.5)
+    link4 = 'test_hover_buttons_4_tables_custom_'
+    browser.get(query.screenshot_saved(f'{link}{link4}1.png'))
+    browser.element('[id="plb0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link4}2.png'))
+    browser.element('[id="mvs0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link4}3.png'))
+    browser.element('[id="tbl0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link4}4.png'))
+    browser.element('[id="glr0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link4}5.png'))
     browser.element('[id="ind0"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
@@ -93,6 +176,26 @@ def test_click_on_menu_glr():
     browser.all('[class ="gallery-controls"]>ul>li')[1].should(have.no.css_class("active"))
     browser.all('[class ="gallery-controls"]>ul>li')[2].should(have.no.css_class("active"))
     browser.all('[class ="gallery-controls"]>ul>li')[3].should(have.no.css_class("active"))
+
+def test_hover_buttons_gallery():
+    print('')
+    print('Главное меню:"gallery":подсветка разделов при наведении')
+    browser.element('[id="ind0"]').hover()
+    time.sleep(1.5)
+    link5 = 'test_hover_buttons_5_gallery_'
+    browser.get(query.screenshot_saved(f'{link}{link5}1.png'))
+    browser.element('[id="plb0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link5}2.png'))
+    browser.element('[id="mvs0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link5}3.png'))
+    browser.element('[id="tbl0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link5}4.png'))
+    browser.element('[id="glr0"]').hover()
+    time.sleep(1.5)
+    browser.get(query.screenshot_saved(f'{link}{link5}5.png'))
     browser.element('[id="ind0"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
