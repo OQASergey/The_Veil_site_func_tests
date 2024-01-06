@@ -40,7 +40,6 @@ def test_scroll_down_up():
     print('Скролл вверх на 20 000 px')
     browser.perform(scroll(0, -20000))
     browser.get(query.screenshot_saved(f'{link}test_scroll_down_up_2_up.png'))
-    print(f'Скриншоты сохранены: {link}')
 
 response2 = requests.get('http://localhost/theveil/theveil/')
 status2 = response2.status_code
