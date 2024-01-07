@@ -2,23 +2,14 @@ from selene import browser, have, query, be
 import requests
 from selene.core.wait import Command
 import time
-
-response = requests.get('http://localhost/theveil/theveil/playbooks.html')
-status = response.status_code
-link = 'C:/_test_screenshots/test_04_page_playbooks/'
-
-def scroll(x: int, y: int) -> Command:
-    return Command(
-        f'scroll page by x {x} y {y}',
-        lambda browser: browser.driver.execute_script(
-            f'window.scrollBy({x}, {y});'
-        )
-    )
+from selenium import webdriver
 
 def test_start():
     browser.open("/theveil/playbooks.html")
     print('')
     print('"playbooks":Загрузка страницы')
+    response = requests.get('http://localhost/theveil/theveil/playbooks.html')
+    status = response.status_code
     if status is 200:
         print('Статус код: ', status, ' OK')
     else:
@@ -29,208 +20,533 @@ def test_click_on_breadcrumbs():
     print('')
     print('"playbooks"->"index" через breadcrumbs')
     browser.element('[class="fa fa-home"]').click()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/index.html').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/index.html'))
     browser.open('/theveil/playbooks.html')
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/playbooks.html').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
+
+def scroll(x: int, y: int) -> Command:
+    return Command(
+        f'scroll page by x {x} y {y}',
+        lambda browser: browser.driver.execute_script(
+            f'window.scrollBy({x}, {y});'
+        )
+    )
+
+link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_04_page_playbooks/'
 
 def test_scroll_down_up():
     print('')
-    print('"playbooks":Скролл вниз на 10 000 px')
+    print('"playbooks":Скроллирование')
     link1 = '01_test_scroll_down_up_'
     browser.perform(scroll(0, 10000))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}_1_down.png'))
-    print('"playbooks":Скролл вверх на 20 000 px')
     browser.perform(scroll(0, -20000))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}2_up.png'))
-    print('"playbooks":Скролл вправа на 1 000 px')
     browser.perform(scroll(1000, 0))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}3_right.png'))
-    print('"playbooks":Скролл влево на 2 000 px')
     browser.perform(scroll(-2000, 0))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}4_left.png'))
 
-def test_hover_booklets():
+link2 = '02_test_playbook_'
+#Первый уровень
+def test_playbook_01():
     print('')
-    print('"playbooks":Наведение на буклеты')
-    link2 = '02_test_hover_booklets_'
-    #Первый уровень
+    print('"playbooks":Буклет_01')
     browser.perform(scroll(0,350))
     browser.all('[name="flr1"]>div')[0].element('[class="ti-pic"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}01.png'))
-    browser.all('[name="flr1"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}02.png'))
-    browser.all('[name="flr1"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}03.png'))
-    browser.all('[name="flr1"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}04.png'))
-    #Второй уровень
-    browser.perform(scroll(0,350))
-    browser.all('[name="flr2"]>div')[0].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}05.png'))
-    browser.all('[name="flr2"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}06.png'))
-    browser.all('[name="flr2"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}07.png'))
-    browser.all('[name="flr2"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}08.png'))
-    #Третий уровень
-    browser.perform(scroll(0,350))
-    browser.all('[name="flr3"]>div')[0].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}09.png'))
-    browser.all('[name="flr3"]>div')[1].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}10.png'))
-    browser.all('[name="flr3"]>div')[2].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}11.png'))
-    browser.all('[name="flr3"]>div')[3].element('[class="ti-pic"]').hover()
-    time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}12.png'))
-    browser.perform(scroll(0,-10000))
-
-def test_click_on_booklets_button():
-    print('')
-    print('"playbooks":Открытие буклета')
-    link3 = '03_test_click_on_booklets_button_'
-    browser.perform(scroll(0,350))
-    #Первый уровень
-    #Первый буклет
-    browser.all('[name="flr1"]>div')[0].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+    browser.get(query.screenshot_saved(f'{link}{link2}01_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[0].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/APPARATUS.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}01_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[0].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr1"]>div')[0].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}01.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}01_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/APPARATUS.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/APPARATUS.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Второй буклет
-    browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_02():
+    print('')
+    print('"playbooks":Буклет_02')
+    browser.all('[name="flr1"]>div')[1].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}02_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[1].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ARCHITECT.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}02_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}02.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}02_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ARCHITECT.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ARCHITECT.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Третий буклет
-    browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_03():
+    print('')
+    print('"playbooks":Буклет_03')
+    browser.all('[name="flr1"]>div')[2].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}03_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[2].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ATTACHED.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}03_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}03.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}03_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ATTACHED.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ATTACHED.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Четвёртый буклет
-    browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_04():
+    print('')
+    print('"playbooks":Буклет_04')
+    browser.all('[name="flr1"]>div')[3].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}04_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[3].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/CATABOLIST.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}04_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}04.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}04_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/CATABOLIST.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/CATABOLIST.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Второй уровень
-    #Пятый буклет
+
+#Второй уровень
+def test_playbook_05():
+    print('')
+    print('"playbooks":Буклет_05')
     browser.perform(scroll(0,350))
-    browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+    browser.all('[name="flr2"]>div')[0].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}05_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[0].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/DYING.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}05_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}05.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}05_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/DYING.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/DYING.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Шестой буклет
-    browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_06():
+    print('')
+    print('"playbooks":Буклет_06')
+    browser.all('[name="flr2"]>div')[1].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}06_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[1].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/EMPATH.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}06_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}06.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}06_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/EMPATH.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/EMPATH.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Седьмой буклет
-    browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_07():
+    print('')
+    print('"playbooks":Буклет_07')
+    browser.all('[name="flr2"]>div')[2].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}07_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[2].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/EXECUTIVE.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}07_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}07.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}07_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/EXECUTIVE.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/EXECUTIVE.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Восьмой буклет
-    browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_08():
+    print('')
+    print('"playbooks":Буклет_08')
+    browser.all('[name="flr2"]>div')[3].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}08_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[3].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/HONED.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}08_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}08.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}08_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/HONED.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/HONED.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Третий уровень
-    #Девятый буклет
+
+#Третий уровень
+def test_playbook_09():
+    print('')
+    print('"playbooks":Буклет_09')
     browser.perform(scroll(0,350))
-    browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+    browser.all('[name="flr3"]>div')[0].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}09_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[0].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/HONORBOUND.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}09_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}09.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}09_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/HONORBOUND.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/HONORBOUND.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Десятый буклет
-    browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_10():
+    print('')
+    print('"playbooks":Буклет_10')
+    browser.all('[name="flr3"]>div')[1].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}10_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[1].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ONOMASTIC.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}10_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}10.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}10_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ONOMASTIC.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ONOMASTIC.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Одинадцатый буклет
-    browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_11():
+    print('')
+    print('"playbooks":Буклет_11')
+    browser.all('[name="flr3"]>div')[2].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}11_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[2].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/SEEKER.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}11_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}11.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}11_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/SEEKER.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/SEEKER.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    #Двенадцатый буклет
-    browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').should(have.attribute('target','_blank'))
+
+def test_playbook_12():
+    print('')
+    print('"playbooks":Буклет_12')
+    browser.all('[name="flr3"]>div')[3].element('[class="ti-pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}12_1_hover_area.png'))
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[3].element('[class="ti-links"]').click()
+    browser.element('[class="mfp-img"]').should(
+        have.attribute(
+            'src', 'http://localhost/theveil/theveil/img/booklet/preview/WAYWARD.jpg'
+        )
+    )
+    time.sleep(0.3)
+    browser.get(query.screenshot_saved(f'{link}{link2}12_2_popup.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').should(
+        have.attribute('target','_blank'
+        )
+    )
     browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link3}12.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}12_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
+    #Проверка загрузки
+    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/WAYWARD.png').status_code
+    if status is 200:
+        pass
+    else:
+        print('Код: ', status)
+        browser.element('[id="reload-button"]').click()
+        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/WAYWARD.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
-    browser.perform(scroll(0,-10000))
 
+def test_download_button():
+    print('')
+    print('"playbooks":Кнопка "download"')
+    link3 = 'http://localhost/theveil/veil_playbooks.pdf'
+    browser.element('[name="dwn1"]').should(have.attribute('href',link3))
+    browser.element('[name="dwn1"]').should(have.attribute('download'))
+    browser.element('[name="dwn1"]>img[alt="Скачать буклеты"]').should(be.present)
+    driver = webdriver.Chrome()
+    driver.get(link3)
+    time.sleep(1)
+    driver.save_screenshot(f'{link}03_test_download_button_to_url.png')
+    driver.close()
 
-
+def test_up_button():
+    print('')
+    print('"playbooks":Кнопка "Наверх"')
+    browser.perform(scroll(0, 10000))
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/playbooks.html#'))
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/playbooks.html#'))
