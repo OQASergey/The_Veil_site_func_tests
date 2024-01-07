@@ -14,10 +14,12 @@ def test_start():
     else:
         print('Код: ', status)
         browser.element('[id="reload-button"]').click()
+
 def test_attention_title():
     print('')
     print('Приветственная страница:Наличие предупреждения')
     browser.element('[id="at1"]').should(have.text("ПРЕДУПРЕЖДЕНИЕ"))
+
 def test_attention_text():
     print('')
     print('Приветственная страница:Наличие текста предупреждения')
