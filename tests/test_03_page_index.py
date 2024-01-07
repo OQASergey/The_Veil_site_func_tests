@@ -60,9 +60,9 @@ def test_scroll_down_up():
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}test_scroll_down_up_4_left.png'))
 
-def test_up_buton():
+def test_up_button():
     print('')
-    print('"index":Клик на кнопку "Наверх"')
+    print('"index":Кнопка "Наверх"')
     browser.perform(scroll(0, 10000))
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/#'))
