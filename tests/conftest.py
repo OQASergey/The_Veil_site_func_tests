@@ -14,13 +14,11 @@ def browser_conditions():
 
     browser.open()
     print('')
-    print('Браузер открыт')
     print('**Начало исполнения тестового набора**')
 
     yield
 
     browser.quit()
     print('')
-    print('Браузер закрыт')
     print('**Завершение исполнения тестового набора**')
     print('Скриншоты сохранены: C:/_test_screenshots/The_Veil_site_func_tests/')
