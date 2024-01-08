@@ -1,19 +1,19 @@
-from selene import browser, have, query
+from selene import browser, have, query, be
 import requests
 from selene.core.wait import Command
 import time
 
 def test_start():
-    browser.open("/")
-    print('')
-    print('Приветственная страница:Загрузка страницы')
-    response = requests.get('http://localhost/theveil/')
-    status = response.status_code
+    status = requests.get('http://localhost/theveil/').status_code
     if status is 200:
-        print('Статус код: ', status, ' OK')
+        print('')
+        print('Статус код: 200 OK')
+        browser.config.timeout = 6
+        browser.open("/")
     else:
+        print('')
         print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
+        browser.config.timeout = 0.1
 
 def test_attention_title():
     print('')
@@ -54,12 +54,6 @@ def test_scroll_down_up():
 def test_open_site():
     print('')
     print('Приветственная страница:Переход основной сайт')
-    response = requests.get('http://localhost/theveil/theveil/')
-    status = response.status_code
     browser.element('[class="opbut"]').click()
-    if status is 200:
-        print('Статус код: ', status, ' OK')
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
     browser.should(have.url_containing('/theveil/'))
+
