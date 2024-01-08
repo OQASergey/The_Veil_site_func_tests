@@ -5,39 +5,23 @@ import time
 from selenium import webdriver
 
 def test_start():
-    browser.open("/theveil/playbooks.html")
-    print('')
-    print('"playbooks":Загрузка страницы')
-    response = requests.get('http://localhost/theveil/theveil/playbooks.html')
-    status = response.status_code
+    status = requests.get('http://localhost/theveil/theveil/playbooks.html').status_code
     if status is 200:
-        print('Статус код: ', status, ' OK')
+        print('')
+        print('Статус код: 200 OK')
+        browser.config.timeout = 6
+        browser.open("/theveil/playbooks.html")
     else:
+        print('')
         print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
+        browser.config.timeout = 0.1
 
 def test_click_on_breadcrumbs():
     print('')
     print('"playbooks"->"index" через breadcrumbs')
     browser.element('[class="fa fa-home"]').click()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/index.html').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/index.html'))
     browser.open('/theveil/playbooks.html')
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/playbooks.html').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
 
 def scroll(x: int, y: int) -> Command:
     return Command(
@@ -95,14 +79,6 @@ def test_playbook_01():
     browser.get(query.screenshot_saved(f'{link}{link2}01_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/APPARATUS.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/APPARATUS.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -133,14 +109,6 @@ def test_playbook_02():
     browser.get(query.screenshot_saved(f'{link}{link2}02_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ARCHITECT.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ARCHITECT.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -171,14 +139,6 @@ def test_playbook_03():
     browser.get(query.screenshot_saved(f'{link}{link2}03_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ATTACHED.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ATTACHED.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -209,14 +169,6 @@ def test_playbook_04():
     browser.get(query.screenshot_saved(f'{link}{link2}04_3_hover_button.png'))
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/CATABOLIST.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/CATABOLIST.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -249,14 +201,6 @@ def test_playbook_05():
     browser.get(query.screenshot_saved(f'{link}{link2}05_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/DYING.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/DYING.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -287,14 +231,6 @@ def test_playbook_06():
     browser.get(query.screenshot_saved(f'{link}{link2}06_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/EMPATH.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/EMPATH.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -325,14 +261,6 @@ def test_playbook_07():
     browser.get(query.screenshot_saved(f'{link}{link2}07_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/EXECUTIVE.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/EXECUTIVE.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -363,14 +291,6 @@ def test_playbook_08():
     browser.get(query.screenshot_saved(f'{link}{link2}08_3_hover_button.png'))
     browser.all('[name="flr2"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/HONED.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/HONED.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -403,14 +323,6 @@ def test_playbook_09():
     browser.get(query.screenshot_saved(f'{link}{link2}09_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[0].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/HONORBOUND.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/HONORBOUND.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -441,14 +353,6 @@ def test_playbook_10():
     browser.get(query.screenshot_saved(f'{link}{link2}10_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[1].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/ONOMASTIC.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/ONOMASTIC.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -479,14 +383,6 @@ def test_playbook_11():
     browser.get(query.screenshot_saved(f'{link}{link2}11_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[2].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/SEEKER.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/SEEKER.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
@@ -517,14 +413,6 @@ def test_playbook_12():
     browser.get(query.screenshot_saved(f'{link}{link2}12_3_hover_button.png'))
     browser.all('[name="flr3"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
-    #Проверка загрузки
-    status = requests.get('http://localhost/theveil/theveil/img/booklet/png/WAYWARD.png').status_code
-    if status is 200:
-        pass
-    else:
-        print('Код: ', status)
-        browser.element('[id="reload-button"]').click()
-        #Конец проверки загрузки
     browser.should(have.url_containing('/theveil/img/booklet/png/WAYWARD.png'))
     browser.close_current_tab()
     browser.switch_to_tab(0)
