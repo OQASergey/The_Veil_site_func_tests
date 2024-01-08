@@ -74,7 +74,7 @@ def test_playbook_01():
     browser.all('[name="flr1"]>div')[0].element('[class="ti-pic"]').hover()
     browser.all('[name="flr1"]>div')[0].element('[id="lang1"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}01_3_hover_rus_book.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}01_3_hover_rus.png'))
     browser.all('[name="flr1"]>div')[0].element('[id="lang1"]').should(
         have.attribute('target','_blank'
         )
@@ -118,7 +118,7 @@ def test_playbook_02():
     browser.all('[name="flr1"]>div')[1].element('[class="ti-pic"]').hover()
     browser.all('[name="flr1"]>div')[1].element('[id="lang1"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}02_3_hover_rus_book.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}02_3_hover_rus.png'))
     browser.all('[name="flr1"]>div')[1].element('[id="lang1"]').should(
         have.attribute('target', '_blank'
                        )
@@ -162,7 +162,7 @@ def test_playbook_03():
     browser.all('[name="flr1"]>div')[2].element('[class="ti-pic"]').hover()
     browser.all('[name="flr1"]>div')[2].element('[id="lang1"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}03_3_hover_rus_book.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}03_3_hover_rus.png'))
     browser.all('[name="flr1"]>div')[2].element('[id="lang1"]').should(
         have.attribute('target', '_blank'
                        )
