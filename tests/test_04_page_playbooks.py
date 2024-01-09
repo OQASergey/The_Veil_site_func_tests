@@ -19,9 +19,9 @@ def test_start():
 def test_click_on_breadcrumbs():
     print('')
     print('"playbooks"->"index" через breadcrumbs')
+    browser.should(have.url_containing('/theveil/playbooks.html'))
     browser.element('[class="fa fa-home"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
-    browser.open('/theveil/playbooks.html')
 
 def scroll(x: int, y: int) -> Command:
     return Command(
@@ -37,6 +37,8 @@ def test_scroll_down_up():
     print('')
     print('"playbooks":Скроллирование')
     link1 = '01_test_scroll_down_up_'
+    browser.open('/theveil/playbooks.html')
+    browser.should(have.url_containing('/theveil/playbooks.html'))
     browser.perform(scroll(0, 10000))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}_1_down.png'))
