@@ -1,4 +1,4 @@
-from selene import browser, have, query, be
+from selene import browser, have, query
 import requests
 from selene.core.wait import Command
 import time
