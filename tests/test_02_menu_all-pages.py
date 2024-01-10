@@ -11,7 +11,7 @@ def test_start():
         browser.open("/theveil/")
     else:
         print('')
-        print('Код: ', status)
+        print('Страница не открыта. Код: ', status)
         browser.config.timeout = 0.1
 
 def test_active_button():
