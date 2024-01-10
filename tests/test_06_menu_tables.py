@@ -13,7 +13,7 @@ def test_start():
         browser.open("/theveil/tables_custom.html")
     else:
         print('')
-        print('Код: ', status)
+        print('Страница не открыта. Код: ', status)
         browser.config.timeout = 0.1
 
 def scroll(x: int, y: int) -> Command:
