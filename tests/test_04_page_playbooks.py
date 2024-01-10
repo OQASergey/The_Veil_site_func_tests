@@ -13,7 +13,7 @@ def test_start():
         browser.open("/theveil/playbooks.html")
     else:
         print('')
-        print('Код: ', status)
+        print('Страница не открыта. Код: ', status)
         browser.config.timeout = 0.1
 
 def test_click_on_breadcrumbs():
