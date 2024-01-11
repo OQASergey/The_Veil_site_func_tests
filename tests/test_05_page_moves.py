@@ -41,7 +41,7 @@ def test_scroll_down_up():
     browser.should(have.url_containing('/theveil/moves.html'))
     browser.perform(scroll(0, 10000))
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link1}_1_down.png'))
+    browser.get(query.screenshot_saved(f'{link}{link1}1_down.png'))
     browser.perform(scroll(0, -20000))
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link1}2_up.png'))
