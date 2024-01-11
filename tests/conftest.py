@@ -14,6 +14,10 @@ def browser_conditions():
 
     browser.open()
     print('')
+    print('[ Параметры тестов ]')
+    print('Браузер - Chrome')
+    print('Размер окна - 1280*1024')
+    print('Путь до скриншотов - C:/_test_screenshots/The_Veil_site_func_tests/')
     print('**Начало исполнения тестового набора**')
 
     yield
@@ -21,4 +25,4 @@ def browser_conditions():
     browser.quit()
     print('')
     print('**Завершение исполнения тестового набора**')
-    print('Скриншоты сохранены: C:/_test_screenshots/The_Veil_site_func_tests/')
+    print('Путь до скриншотов: C:/_test_screenshots/The_Veil_site_func_tests/')
