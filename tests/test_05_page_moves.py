@@ -35,7 +35,7 @@ link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_05_page_moves/'
 
 def test_scroll_down_up():
     print('')
-    print('"playbooks":Скроллирование')
+    print('"moves":Скроллирование')
     link1 = '01_test_scroll_down_up_'
     browser.open('/theveil/moves.html')
     browser.should(have.url_containing('/theveil/moves.html'))
