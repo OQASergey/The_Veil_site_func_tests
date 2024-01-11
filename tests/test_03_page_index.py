@@ -5,7 +5,7 @@ import time
 
 def test_start():
     status = requests.get('http://localhost/theveil/theveil/').status_code
-    if status is 200:
+    if status == 200:
         print('')
         print('Статус код: 200 OK')
         browser.config.timeout = 6
