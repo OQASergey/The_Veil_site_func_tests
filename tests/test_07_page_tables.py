@@ -15,13 +15,6 @@ def test_start():
         print('Страница не открыта. Код: ', status)
         browser.config.timeout = 0.1
 
-def test_click_on_breadcrumbs():
-    print('')
-    print('"tables_custom"->"index" через breadcrumbs')
-    browser.should(have.url_containing('/theveil/tables_custom.html'))
-    browser.element('[class="fa fa-home"]').click()
-    browser.should(have.url_containing('/theveil/index.html'))
-
 def scroll(x: int, y: int) -> Command:
     return Command(
         f'scroll page by x {x} y {y}',
@@ -78,6 +71,13 @@ def test_up_button_custom():
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/tables_custom.html#'))
 
+def test_click_on_breadcrumbs_custom():
+    print('')
+    print('"tables_custom#"->"index" через breadcrumbs')
+    browser.should(have.url_containing('/theveil/tables_custom.html#'))
+    browser.element('[class="fa fa-home"]').click()
+    browser.should(have.url_containing('/theveil/index.html'))
+
 def test_scroll_down_up_gun():
     print('')
     print('"tables_gun":Скроллирование')
@@ -115,6 +115,13 @@ def test_up_button_gun():
     browser.should(have.url_containing('/theveil/tables_gun.html#'))
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/tables_gun.html#'))
+
+def test_click_on_breadcrumbs_gun():
+    print('')
+    print('"tables_gun#"->"index" через breadcrumbs')
+    browser.should(have.url_containing('/theveil/tables_gun.html#'))
+    browser.element('[class="fa fa-home"]').click()
+    browser.should(have.url_containing('/theveil/index.html'))
 
 def test_scroll_down_up_tech():
     print('')
@@ -154,6 +161,13 @@ def test_up_button_tech():
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/tables_tech.html#'))
 
+def test_click_on_breadcrumbs_tech():
+    print('')
+    print('"tables_tech#"->"index" через breadcrumbs')
+    browser.should(have.url_containing('/theveil/tables_tech.html#'))
+    browser.element('[class="fa fa-home"]').click()
+    browser.should(have.url_containing('/theveil/index.html'))
+
 def test_scroll_down_up_cred():
     print('')
     print('"tables_cred":Скроллирование')
@@ -190,3 +204,10 @@ def test_up_button_cred():
     browser.should(have.url_containing('/theveil/tables_cred.html#'))
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/tables_cred.html#'))
+
+def test_click_on_breadcrumbs_cred():
+    print('')
+    print('"tables_cred#"->"index" через breadcrumbs')
+    browser.should(have.url_containing('/theveil/tables_cred.html#'))
+    browser.element('[class="fa fa-home"]').click()
+    browser.should(have.url_containing('/theveil/index.html'))
