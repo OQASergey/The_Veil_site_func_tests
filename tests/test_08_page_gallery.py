@@ -1,13 +1,15 @@
-from selene import browser, have, query
+from selene import browser, have, query, be
 import requests
 from selene.core.wait import Command
 import time
-from selenium import webdriver
+import random
 
 sa = 12 #size of all pics
 sl = 9 #size of landscape pics
 sc = 7 #size of characters pics
 so = 3 #size of other pics
+def pic_number(a, b):
+    return random.randint(a, b)
 
 def test_start():
     status = requests.get('http://localhost/theveil/theveil/gallery.html').status_code
@@ -66,7 +68,7 @@ def test_scroll():
 def test_active_button_all2all():
     print('')
     print('Меню галереи:"all"->"all"')
-    browser.perform(scroll(0,-600))
+    browser.open('/theveil/gallery.html#gallery')
     browser.all('[class ="gallery-controls"]>ul>li')[0].click()
     browser.should(have.url_containing('/theveil/gallery.html'))
     browser.all('[class ="gallery-controls"]>ul>li')[0].should(have.css_class("active"))
@@ -105,7 +107,9 @@ def test_active_button_all2land():
     # Отображение изображений ("landscape")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="landscape"]').should(have.size(sl))
-    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sl
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -127,7 +131,9 @@ def test_active_button_land2land():
     # Отображение изображений ("landscape")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="landscape"]').should(have.size(sl))
-    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sl
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -151,7 +157,9 @@ def test_active_button_land2char():
     # Отображение изображений ("characters")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="characters"]').should(have.size(sc))
-    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sc
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -173,7 +181,9 @@ def test_active_button_char2char():
     # Отображение изображений ("characters")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="characters"]').should(have.size(sc))
-    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sc
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -197,7 +207,9 @@ def test_active_button_char2other():
     # Отображение изображений ("other")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="other"]').should(have.size(so))
-    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - so
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -219,7 +231,9 @@ def test_active_button_other2other():
     # Отображение изображений ("other")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="other"]').should(have.size(so))
-    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - so
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -260,7 +274,9 @@ def test_active_button_all2char():
     # Отображение изображений ("characters")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="characters"]').should(have.size(sc))
-    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sc
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -282,7 +298,9 @@ def test_active_button_char2land():
     # Отображение изображений ("landscape")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="landscape"]').should(have.size(sl))
-    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sl
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -304,7 +322,9 @@ def test_active_button_land2other():
     # Отображение изображений ("other")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="other"]').should(have.size(so))
-    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - so
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -326,7 +346,9 @@ def test_active_button_other2char():
     # Отображение изображений ("characters")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="characters"]').should(have.size(sc))
-    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="characters"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - sc
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -367,7 +389,9 @@ def test_active_button_all2other():
     # Отображение изображений ("other")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="other"]').should(have.size(so))
-    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="other"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hide = sa - so
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hide))
 
@@ -389,7 +413,9 @@ def test_active_button_other2land():
     # Отображение изображений ("landscape")
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[class*="landscape"]').should(have.size(sl))
-    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(have.size(0))
+    browser.all('[class="row gallery-filter"]>[class*="landscape"][style*="display: none;"]').should(
+        have.size(0)
+    )
     hiden = sa - sl
     browser.all('[class="row gallery-filter"]>[style="display: none;"]').should(have.size(hiden))
 
@@ -412,18 +438,129 @@ def test_active_button_land2all():
     browser.all('[class="row gallery-filter"]>div').should(have.size(sa))
     browser.all('[class="row gallery-filter"]>[style*="display: none;"]').should(have.size(0))
 
-#TODO0: рандомизаторы от 0 до значений sa, sl, sc и so
-#TODO1: проверка открытия рандомного изображения в каждой категории изображений
-#TODO2: проверка закрытие изображения на крестик
+def test_popup_pictures_all():
+    print('')
+    print('"gallery":Изображения:"all":Pop-up')
+    link3 = '06_test_popup_pictures_all_'
+    browser.open('/theveil/gallery.html')
+    browser.open('/theveil/gallery.html#gallery')
+    browser.all('[class ="gallery-controls"]>ul>li')[0].click()
+    # Проверка наведения и открытия на первые 6 изображений (для удобного отображения на скриншоте)
+    randsix = pic_number(0,5)
+    time.sleep(1.5)
+    browser.all('[id="pic"]')[randsix].hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link3}1_hover_pic_area_randsix(номер_картинки#{randsix+1}).png'))
+    browser.all('[class="gi-hover"]')[randsix].element('[class="image-popup"]').should(have.attribute
+        ('href',f'http://localhost/theveil/theveil/img/gallery/gallery-{randsix+1}.jpg')
+    )
+    browser.all('[class="gi-hover"]')[randsix].element('[class="image-popup"]').click()
+    browser.element('[class="mfp-figure"]').should(be.present)
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}2_popup_pic_randsix(номер_картинки#{randsix+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+    # Проверка открытия другого случайного изображения
+    randall = pic_number(0,sa-1)
+    while randall == randsix:
+         randall = pic_number(0,sa-1)
+    browser.all('[id="pic"]')[randall].hover()
+    time.sleep(1)
+    browser.all('[class="gi-hover"]')[randall].element('[class="image-popup"]').click()
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}3_popup_pic_randall(номер_картинки#{randall+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+
+def test_popup_pictures_land():
+    print('')
+    print('"gallery":Изображения:"landscape":Pop-up')
+    link3 = '07_test_popup_pictures_land_'
+    browser.open('/theveil/gallery.html')
+    browser.open('/theveil/gallery.html#gallery')
+    browser.all('[class ="gallery-controls"]>ul>li')[1].click()
+    # Проверка наведения и открытия на первые 6 изображений (для удобста отображения на скриншоте)
+    randsix = pic_number(0,5)
+    time.sleep(1.5)
+    browser.all('[class*="landscape"]')[randsix].element('[id="pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link3}1_hover_pic_area_randsix(номер_картинки#{randsix+1}).png'))
+    browser.all('[class*="landscape"]')[randsix].element('[class="image-popup"]').click()
+    browser.element('[class="mfp-figure"]').should(be.present)
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}2_popup_pic_randsix(номер_картинки#{randsix+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+    # Проверка открытия изображения вне визуального отображения
+    randall = pic_number(0, sl-1)
+    while randall == randsix:
+        randall = pic_number(0,sl-1)
+    browser.all('[class*="landscape"]')[randall].element('[id="pic"]').hover()
+    time.sleep(1)
+    browser.all('[class*="landscape"]')[randall].element('[class="image-popup"]').click()
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}3_popup_pic_randall(номер_картинки#{randall+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+
+def test_popup_pictures_char():
+    print('')
+    print('"gallery":Изображения:"characters":Pop-up')
+    link3 = '08_test_popup_pictures_char_'
+    browser.open('/theveil/gallery.html')
+    browser.open('/theveil/gallery.html#gallery')
+    browser.all('[class ="gallery-controls"]>ul>li')[2].click()
+    time.sleep(1.5)
+    randsix = pic_number(0,5)
+    browser.all('[class*="characters"]')[randsix].element('[id="pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link3}1_hover_pic_area_randsix(номер_картинки#{randsix+1}).png'))
+    browser.all('[class*="characters"]')[randsix].element('[class="image-popup"]').click()
+    browser.element('[class="mfp-figure"]').should(be.present)
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}2_popup_pic_randsix(номер_картинки#{randsix+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+    randall = pic_number(0,sc-1)
+    while randall == randsix:
+        randall = pic_number(0,sc-1)
+    browser.all('[class*="characters"]')[randall].element('[id="pic"]').hover()
+    time.sleep(1)
+    browser.all('[class*="characters"]')[randall].element('[class="image-popup"]').click()
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}3_popup_pic_randall(номер_картинки#{randall+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+
+def test_popup_pictures_other():
+    print('')
+    print('"gallery":Изображения:"other":Pop-up')
+    link3 = '09_test_popup_pictures_other_'
+    browser.open('/theveil/gallery.html')
+    browser.open('/theveil/gallery.html#gallery')
+    browser.all('[class ="gallery-controls"]>ul>li')[3].click()
+    rand = pic_number(0,so-1)
+    time.sleep(1.5)
+    browser.all('[class*="other"]')[rand].element('[id="pic"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link3}1_hover_pic_area(номер_картинки#{rand+1}).png'))
+    browser.all('[class*="other"]')[rand].element('[class="image-popup"]').click()
+    browser.element('[class="mfp-figure"]').should(be.present)
+    time.sleep(0.5)
+    browser.get(query.screenshot_saved(f'{link}{link3}2_popup_pic(номер_картинки#{rand+1}).png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-figure"]').should(be.absent)
+
 #TODO3: проверка закрытия изображения на область вне картинки
 #TODO4: проверка видео (+ скриншот)
 #TODO5: проверка закрытие видео на крестик
 #TODO6: проверка закрытия видео на область вне картинки
-#TODO7: проверка клика по кнопке "Наверх"
 
-def test_popup_pictures():
-    pass
-
-
-
-
+def test_up_button_gallery():
+    print('')
+    print('"gallery":Кнопка "Наверх"')
+    browser.perform(scroll(0, 10000))
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/gallery.html#'))
+    browser.element('[class="primary-btn cta-btn"]').click()
+    browser.should(have.url_containing('/theveil/gallery.html#'))
