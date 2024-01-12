@@ -4,8 +4,10 @@ from selene.core.wait import Command
 import time
 from selenium import webdriver
 
+core_link = 'http://localhost/theveil'
+
 def test_start():
-    status = requests.get('http://localhost/theveil/theveil/playbooks.html').status_code
+    status = requests.get(f'{core_link}/theveil/playbooks.html').status_code
     if status == 200:
         print('')
         print('Статус код: 200 OK')
@@ -66,7 +68,7 @@ def test_playbook_01():
     browser.all('[name="flr1"]>div')[0].element('[id="plus1"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/APPARATUS.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/APPARATUS.jpg'
         )
     )
     time.sleep(0.3)
@@ -110,7 +112,7 @@ def test_playbook_02():
     browser.all('[name="flr1"]>div')[1].element('[id="plus1"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ARCHITECT.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/ARCHITECT.jpg'
         )
     )
     time.sleep(0.3)
@@ -154,7 +156,7 @@ def test_playbook_03():
     browser.all('[name="flr1"]>div')[2].element('[id="plus1"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ATTACHED.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/ATTACHED.jpg'
         )
     )
     time.sleep(0.3)
@@ -198,7 +200,7 @@ def test_playbook_04():
     browser.all('[name="flr1"]>div')[3].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/CATABOLIST.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/CATABOLIST.jpg'
         )
     )
     time.sleep(0.3)
@@ -231,7 +233,7 @@ def test_playbook_05():
     browser.all('[name="flr2"]>div')[0].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/DYING.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/DYING.jpg'
         )
     )
     time.sleep(0.3)
@@ -262,7 +264,7 @@ def test_playbook_06():
     browser.all('[name="flr2"]>div')[1].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/EMPATH.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/EMPATH.jpg'
         )
     )
     time.sleep(0.3)
@@ -293,7 +295,7 @@ def test_playbook_07():
     browser.all('[name="flr2"]>div')[2].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/EXECUTIVE.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/EXECUTIVE.jpg'
         )
     )
     time.sleep(0.3)
@@ -324,7 +326,7 @@ def test_playbook_08():
     browser.all('[name="flr2"]>div')[3].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/HONED.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/HONED.jpg'
         )
     )
     time.sleep(0.3)
@@ -357,7 +359,7 @@ def test_playbook_09():
     browser.all('[name="flr3"]>div')[0].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/HONORBOUND.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/HONORBOUND.jpg'
         )
     )
     time.sleep(0.3)
@@ -388,7 +390,7 @@ def test_playbook_10():
     browser.all('[name="flr3"]>div')[1].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/ONOMASTIC.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/ONOMASTIC.jpg'
         )
     )
     time.sleep(0.3)
@@ -419,7 +421,7 @@ def test_playbook_11():
     browser.all('[name="flr3"]>div')[2].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/SEEKER.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/SEEKER.jpg'
         )
     )
     time.sleep(0.3)
@@ -450,7 +452,7 @@ def test_playbook_12():
     browser.all('[name="flr3"]>div')[3].element('[class="ti-links"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
-            'src', 'http://localhost/theveil/theveil/img/booklet/preview/WAYWARD.jpg'
+            'src', f'{core_link}/theveil/img/booklet/preview/WAYWARD.jpg'
         )
     )
     time.sleep(0.3)
