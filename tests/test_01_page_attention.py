@@ -35,7 +35,7 @@ def scroll(x: int, y: int) -> Command:
 
 link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_01_page_attention/'
 
-def test_scroll_down_up():
+def test_scroll():
     print('')
     print('Скроллирование')
     browser.perform(scroll(0, 10000))

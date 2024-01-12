@@ -25,7 +25,7 @@ def scroll(x: int, y: int) -> Command:
 
 link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_03_page_index/'
 
-def test_scroll_down_up():
+def test_scroll():
     print('')
     print('"index":Скролл вниз на 10 000 px')
     browser.should(have.url_containing('/theveil/'))

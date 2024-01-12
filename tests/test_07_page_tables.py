@@ -25,7 +25,7 @@ def scroll(x: int, y: int) -> Command:
 
 link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_07_page_tables/'
 
-def test_scroll_down_up_custom():
+def test_scroll_custom():
     print('')
     print('"tables_custom":Скроллирование')
     link1 = '01_test_scroll_down_up_custom_'
@@ -78,7 +78,7 @@ def test_click_on_breadcrumbs_custom():
     browser.element('[class="fa fa-home"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
-def test_scroll_down_up_gun():
+def test_scroll_gun():
     print('')
     print('"tables_gun":Скроллирование')
     link1 = '02_test_scroll_down_up_gun_'
@@ -123,7 +123,7 @@ def test_click_on_breadcrumbs_gun():
     browser.element('[class="fa fa-home"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
-def test_scroll_down_up_tech():
+def test_scroll_tech():
     print('')
     print('"tables_tech":Скроллирование')
     link1 = '03_test_scroll_down_up_tech_'
@@ -168,7 +168,7 @@ def test_click_on_breadcrumbs_tech():
     browser.element('[class="fa fa-home"]').click()
     browser.should(have.url_containing('/theveil/index.html'))
 
-def test_scroll_down_up_cred():
+def test_scroll_cred():
     print('')
     print('"tables_cred":Скроллирование')
     link1 = '04_test_scroll_down_up_cred_'

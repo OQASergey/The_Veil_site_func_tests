@@ -33,7 +33,7 @@ def scroll(x: int, y: int) -> Command:
 
 link = 'C:/_test_screenshots/The_Veil_site_func_tests/test_04_page_playbooks/'
 
-def test_scroll_down_up():
+def test_scroll():
     print('')
     print('"playbooks":Скроллирование')
     link1 = '01_test_scroll_down_up_'
