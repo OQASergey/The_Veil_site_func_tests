@@ -551,10 +551,19 @@ def test_popup_pictures_other():
     browser.element('[title="Close (Esc)"]').click()
     browser.element('[class="mfp-figure"]').should(be.absent)
 
-#TODO3: проверка закрытия изображения на область вне картинки
-#TODO4: проверка видео (+ скриншот)
-#TODO5: проверка закрытие видео на крестик
-#TODO6: проверка закрытия видео на область вне картинки
+def test_video():
+    print('')
+    print('"gallery":Видео"')
+    browser.element('[class="mfp-iframe"]').should(be.absent)
+    browser.element('[class="play-btn video-popup"]').click()
+    time.sleep(1)
+    browser.element('[class="mfp-iframe"]').should(
+        have.attribute('src','http://www.youtube.com/embed/NjlGjkAFD2w?autoplay=1')
+    )
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}10_test_video.png'))
+    browser.element('[title="Close (Esc)"]').click()
+    browser.element('[class="mfp-iframe"]').should(be.absent)
 
 def test_up_button_gallery():
     print('')
@@ -564,3 +573,6 @@ def test_up_button_gallery():
     browser.should(have.url_containing('/theveil/gallery.html#'))
     browser.element('[class="primary-btn cta-btn"]').click()
     browser.should(have.url_containing('/theveil/gallery.html#'))
+
+#TODO1: проверка закрытия изображения на область вне картинки
+#TODO2: проверка закрытия видео на область вне картинки
