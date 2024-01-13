@@ -108,7 +108,7 @@ def test_download_button():
     browser.element('[name="dwn1"]>img[alt="Скачать буклеты"]').should(be.present)
     driver = webdriver.Chrome()
     driver.get(link3)
-    time.sleep(2)
+    time.sleep(3)
     driver.save_screenshot(f'{link}04_test_download_button_to_url.png')
     driver.close()
 
