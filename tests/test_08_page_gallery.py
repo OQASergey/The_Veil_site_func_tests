@@ -560,7 +560,7 @@ def test_video():
     browser.element('[class="mfp-iframe"]').should(
         have.attribute('src','http://www.youtube.com/embed/NjlGjkAFD2w?autoplay=1')
     )
-    time.sleep(1)
+    time.sleep(2)
     browser.get(query.screenshot_saved(f'{link}10_test_video.png'))
     browser.element('[title="Close (Esc)"]').click()
     browser.element('[class="mfp-iframe"]').should(be.absent)
