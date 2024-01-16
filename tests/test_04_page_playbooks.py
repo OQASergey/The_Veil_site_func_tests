@@ -193,11 +193,11 @@ def test_playbook_04():
     print('')
     print('"playbooks":Буклет_04')
     browser.all('[name="flr1"]>div')[3].element('[class="ti-pic"]').hover()
-    browser.all('[name="flr1"]>div')[3].element('[class="ti-links"]').hover()
+    browser.all('[name="flr1"]>div')[3].element('[id="plus1"]').hover()
     time.sleep(1)
     browser.get(query.screenshot_saved(f'{link}{link2}04_1_hover_popup.png'))
     browser.element('[class="mfp-img"]').should(be.absent)
-    browser.all('[name="flr1"]>div')[3].element('[class="ti-links"]').click()
+    browser.all('[name="flr1"]>div')[3].element('[id="plus1"]').click()
     browser.element('[class="mfp-img"]').should(
         have.attribute(
             'src', f'{core_link}/theveil/img/booklet/preview/CATABOLIST.jpg'
@@ -207,13 +207,26 @@ def test_playbook_04():
     browser.get(query.screenshot_saved(f'{link}{link2}04_2_popup.png'))
     browser.element('[title="Close (Esc)"]').click()
     browser.element('[class="mfp-img"]').should(be.absent)
+    browser.all('[name="flr1"]>div')[3].element('[class="ti-pic"]').hover()
+    browser.all('[name="flr1"]>div')[3].element('[id="lang1"]').hover()
+    time.sleep(1)
+    browser.get(query.screenshot_saved(f'{link}{link2}04_3_hover_rus.png'))
+    browser.all('[name="flr1"]>div')[3].element('[id="lang1"]').should(
+        have.attribute('target', '_blank'
+                       )
+    )
+    browser.all('[name="flr1"]>div')[3].element('[id="lang1"]').click()
+    browser.switch_to_next_tab()
+    browser.should(have.url_containing('/theveil/img/booklet/png/CATABOLIST_rus.png'))
+    browser.close_current_tab()
+    browser.switch_to_tab(0)
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').should(
         have.attribute('target','_blank'
         )
     )
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').hover()
     time.sleep(1)
-    browser.get(query.screenshot_saved(f'{link}{link2}04_3_hover_button.png'))
+    browser.get(query.screenshot_saved(f'{link}{link2}04_4_hover_button.png'))
     browser.all('[name="flr1"]>div')[3].element('[class="primary-btn f-btn"]').click()
     browser.switch_to_next_tab()
     browser.should(have.url_containing('/theveil/img/booklet/png/CATABOLIST.png'))
